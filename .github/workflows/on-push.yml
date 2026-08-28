@@ -1,0 +1,14 @@
+name: on push
+
+on: push
+
+jobs:
+  pushjob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push triggered on any branch
+        run: |
+          echo "Event name: $GITHUB_EVENT_NAME"
+          echo "Branch ref: $GITHUB_REF"
+          echo "Commit SHA: $COMMIT_SHA"
+          echo "Pushed by: $GITHUB_ACTOR"
