@@ -1,0 +1,16 @@
+name: On pull request
+
+on:
+  pull_request:
+    types: [assigned, synchronize, reopened]
+
+jobs:
+  on_pull_req:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull req happens
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Event Base: ${{ github.base_ref }}"
+          echo "Event Head: ${{ github.head_ref }}"
+          echo "Event PR Number: ${{ github.event.pull_request.number }}"
