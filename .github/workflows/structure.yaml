@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Single line greet
-        run: echo"Greet one"
+        run: echo "Greet one"
 
       - name: Multi line greet
         run: |
