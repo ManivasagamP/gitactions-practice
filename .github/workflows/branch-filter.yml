@@ -1,0 +1,17 @@
+name: Branch filter
+
+on: 
+  push:
+    branches:
+      - main
+      - "release/**"
+    paths:
+      - "src/**"
+      - "**.js"
+
+jobs:
+  on_speific_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: When the above specific branch triggered
+        run: echo "Specific branch got triggered ${{ github.ref_name }}"
