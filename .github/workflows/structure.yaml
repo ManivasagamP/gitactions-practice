@@ -1,0 +1,24 @@
+name: Hello world
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Single line greet
+        run: echo"Greet one"
+
+      - name: Multi line greet
+        run: |
+          echo "Greet 1"
+          echo "Greet 2"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chumma test
+        run: echo "chumma test"
+
+      - name: Chumma test 2
+        run: echo "chumma test 2"
