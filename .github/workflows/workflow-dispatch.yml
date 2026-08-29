@@ -1,0 +1,59 @@
+name: Workflow dispathch with Inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "Staging"
+        type: choice
+        options:
+          - Staging
+          - Dev
+          - Pre-Release
+      version:
+        description: "The version you want to upload"
+        type: string
+        required: false
+        default: "latest"
+      dry_run:
+        description: "Only try, no actaul deploy"
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  test-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Showing the user inputs"
+        run: |
+          echo "Environment: ${{inputs.environment}}"
+          echo "Version: ${{inputs.version}}"
+          echo "Dry run: ${{inputs.dry_run}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
