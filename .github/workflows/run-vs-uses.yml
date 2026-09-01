@@ -1,0 +1,65 @@
+name: Run vs Uses
+
+on:
+  workflow_dispatch:
+
+jobs:
+  intro:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v5
+
+      - name: Print the code base
+        run: echo "The files in repo:" && ls -la
+
+  depth-1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repo with depth 1
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          
+      - name: Show commit count
+        run: echo "The fetch depth count:" && git log --oneline | wc -l
+
+  depth-2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repo with depth 2
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          
+      - name: Counts for depth 2
+        run: echo "The fetch depth count:" && git log --oneline | wc -l
+
+  depth-0:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repo with depth 0
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Counts for depth 0
+        run: echo "The fecth depth count:" && git log --oneline | wc -l
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      
