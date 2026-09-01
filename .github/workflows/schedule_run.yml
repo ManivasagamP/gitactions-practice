@@ -2,7 +2,7 @@ name: Schedule Run
 
 on:
   schedule:
-    - cron: "28 6 1 9 *"
+    - cron: "* * * * *"
 
 jobs:
   schedule-task:
