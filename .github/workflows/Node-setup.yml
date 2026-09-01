@@ -1,0 +1,26 @@
+name: Node Setup
+
+on: workflow_dispatch
+
+jobs:
+  Workflow-installation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check preBuild tools
+        run: |
+          docker --version
+
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install node setup
+        uses: actions/setup-node@v6
+        with:
+          node-version:  "20"
+          cache: "npm"
+          cache-dependency-path: sample-app/package-lock.json
+
+      - name: Check the versions
+        run: |
+          node --version
+          npm --version
