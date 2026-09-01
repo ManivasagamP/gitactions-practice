@@ -2,11 +2,11 @@ name: Schedule Run
 
 on:
   schedule:
-    - cron: "17 6 1 9 *"
+    - cron: "28 6 1 9 *"
 
 jobs:
   schedule-task:
     runs-on: ubuntu-latest
     steps:
       - name: "Checking schedule run"
-        run: echo "Schedule running successfully at 11:42"
+        run: echo "Schedule running successfully at 11:58 AM IST"
