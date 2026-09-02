@@ -27,6 +27,6 @@ jobs:
           echo "Stage level is: $STAGE"
 
       - name: Reading env with if condition
-        if: ${{ env.APP_NAME == 'DEMO_AP'}}
+        if: ${{ env.APP_NAME == 'DEMO_APP'}}
         run: echo "Expression saw the app name as ${{ env.APP_NAME }}"
           
