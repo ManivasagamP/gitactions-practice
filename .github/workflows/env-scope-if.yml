@@ -1,0 +1,32 @@
+name:
+  Env Scope with if condition
+
+on:
+  workflow_dispatch
+
+env:
+  APP_NAME: DEMO_APP
+  STAGE: Global
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      STAGE: Job level
+    steps:
+      - name: Global level App name + job level stage
+        run: |
+          echo "App name is: $APP_NAME"
+          echo "Stage level is: $STAGE"
+
+      - name: Global level App name + step level stage
+        env:
+          STAGE: Step level
+        run: |
+          echo "App name is: $APP_NAME"
+          echo "Stage level is: $STAGE"
+
+      - name: Reading env with if condition
+        if: ${{ env.APP_NAME == 'DEMO_APP'}}
+        run: echo "Expression saw the app name as ${{ env.APP_NAME }}"
+          
