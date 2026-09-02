@@ -1,0 +1,44 @@
+name:
+  Contexts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job_context_reading:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking the github contexts
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Reference: ${{ github.ref_name }}"
+          echo "Event name: ${{ github.event_name }}"
+
+      - name: Checking the runner contexts
+        run: |
+          echo "OS: ${{runner.os}}"
+          echo "Arch: ${{runner.arch}}"
+
+      - name: Checking all the github contexts
+        env:
+          GITHUB_CONTEXTS: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXTS"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
