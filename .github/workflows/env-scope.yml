@@ -7,9 +7,29 @@ env:
   NAME: Mani
 
 jobs:
-  env-job:
+  env-job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Variable declaring
+      - name: Variable declaring in global level
+        run: |
+          echo "My name is $NAME"
+
+  env-job2:
+    runs-on: ubuntu-latest
+    env:
+      NAME: Manivasagam
+    steps:
+      - name: Variable declaring in job level
+        run: |
+          echo "My name is $NAME"
+
+  env-job3:
+    runs-on: ubuntu-latest
+    env:
+      NAME: Manivasagam
+    steps:
+      - name: Variable declaring in step level
+        env:
+          NAME: Manivasagam Paramasivam
         run: |
           echo "My name is $NAME"
