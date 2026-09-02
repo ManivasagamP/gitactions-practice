@@ -1,0 +1,15 @@
+name: ENV-SCOPE
+
+on:
+  workflow_dispatch:
+
+env:
+  NAME: Mani
+
+jobs:
+  env-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Variable declaring
+        run: |
+          echo "My name is $NAME"
