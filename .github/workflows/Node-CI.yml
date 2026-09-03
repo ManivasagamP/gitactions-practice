@@ -1,0 +1,71 @@
+name: Node CI setup
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  Build-Test-Job:
+    name: Build and testing the node
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sample-app
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+
+      - name: setup node js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+          cache: 'npm'
+          node_dependency_path: 'sample_app/package-lock.json'
+
+      - name: Install Node js
+        run: npm install
+
+      - name: Check lint
+        run: npm run lint
+
+      - name: Check test
+        run: npm test
+
+      - name: Summary
+        run: |
+          echo "Pipeline triggered on the commit: ${{github.sha}}"
+          echo "Pipeline was triggered on the event: ${{github.event_name}} on the branch: ${{github.ref_name}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
