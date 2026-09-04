@@ -1,0 +1,63 @@
+name:
+  If conditions checking
+
+on:
+  push:
+    branches: 'main'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  all-conditions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runs on the all way
+        run: echo "Runs all the time"
+
+  only-on-main-push:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only on the Main branch push
+        run: echo "Correctly worked on the main push"
+
+  only-on-pull-requests:
+    if: github.event_name == 'pull-requests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run only on PR
+        run: echo "Runs only on the pr"
+
+  step-conditions:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_TARGET: 'prod'
+    steps:
+      - name: Only if on the PROD
+        if: env.DEPLOY_TARGET == 'prod'
+        run: echo "The target is prod"
+
+      - name: A step that might fail
+        id: risky
+        continue-on-error: true
+        run: exit 1
+
+      - name: Step after the fail we carried
+        if: steps.risky.outcome == 'failure'
+        run: echo "Even the above job is failure it is carried."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
