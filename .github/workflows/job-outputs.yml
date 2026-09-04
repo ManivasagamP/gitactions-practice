@@ -15,7 +15,7 @@ jobs:
         id: produce
         run: |
           VERSION="${{github.run_number}}"
-          echo "the version is: version=$VERSION"  >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION"  >> "$GITHUB_OUTPUT"
 
       - name: Reading from the inner Step
         run: |
