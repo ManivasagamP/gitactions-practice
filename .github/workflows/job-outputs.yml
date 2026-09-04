@@ -14,7 +14,7 @@ jobs:
       - name: Writing the producer in step 1
         id: produce
         run: |
-          VERSION: "${{github.run_number}}"
+          VERSION= "${{github.run_number}}"
           echo "the version is: version=$VERSION"  >> "$GITHUB_OUTPUT"
 
       - name: Reading from the inner Step
