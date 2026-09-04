@@ -45,7 +45,7 @@ jobs:
 
   job6:
     needs: job1
-    if: failure() && github.ref == 'ref/heads/main'
+    if: failure() 
     runs-on: ubuntu-latest
     steps:
         - run: echo "Escalate to prod since it was run on Production"
