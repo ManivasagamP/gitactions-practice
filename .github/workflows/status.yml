@@ -48,8 +48,7 @@ jobs:
     if: failure() && github.ref == 'ref/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Need to escalate Eng because occured in Prod
-        run: echo "Escalate to prod since it was run on Production"
+        - run: echo "Escalate to prod since it was run on Production"
     
 
 
