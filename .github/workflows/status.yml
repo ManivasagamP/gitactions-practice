@@ -10,7 +10,7 @@ jobs:
       - name: Wanted failure
         run: |
           echo "failing in wanted"
-          exit 1
+          
 
   job2:
     needs: job1
