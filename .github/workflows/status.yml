@@ -1,0 +1,66 @@
+name: Status handling functions
+
+on:
+  workflow_call:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wanted failure
+        run: |
+          echo "failing in wanted"
+          exit 1
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: On failure
+        run: echo "Only if everything pass"
+
+  job3:
+    needs: job1
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+        - name: Job failed
+          run: echo "Job failed so showing this failed status ${{needs.job1.result}}" 
+
+  job4:
+    needs: job1
+    if: cancelled()
+    runs-on: ubuntu-latest
+    steps:
+      - name: cancelled wantedly
+        run: echo "Cancelled wantedly ${{needs.job1.result}} "
+
+  job5:
+    needs: job1
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: For testing the Always
+        run: echo "What ever it is will always run... because used always"
+
+  job6:
+    needs: job1
+    if: failure() && github.ref == 'ref/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Need to escalate Eng because occured in Prod
+        run: echo "Escalate to prod since it was run on Production"
+    
+
+
+
+
+
+
+
+
+
+
+
+        
+        
