@@ -1,0 +1,42 @@
+name: Job Outputs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  producer:
+    runs-on: ubuntu-latest
+
+    outputs:
+      procuce_version: ${{steps.produce.outputs.version}}
+    
+    steps:
+      - name: Writing the producer in step 1
+        id: produce
+        run: |
+          VERSION: "${{github.run_number}}"
+          echo "the version is: version=$VERSION"  >> "$GITHUB_OUTPUT"
+
+      - name: Reading from the inner Step
+        run: |
+          echo " The previous step result version is: ${{steps.produce.outputs.version}}"
+
+  consumer:
+    runs-on: ubuntu-latest
+    needs: producer
+    steps:
+      - name: Accessing in different job
+        run: |
+          echo "Produce job output is ${{needs.producer.outputs.procuce_version}} "
+
+
+
+
+
+
+
+
+
+
+
+    
