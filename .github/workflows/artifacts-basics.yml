@@ -1,0 +1,71 @@
+name:
+  Artifacts basics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sample-app
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Steup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'sample-app/package-lock.json'
+
+      - name: Run CI
+        run: npm ci
+
+      - name: Run build
+        run: npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-build
+          path: sample-app/dist/
+
+          retention-days: 7
+          if-no-files-found: error
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Downlaod artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: app-build
+          path: downloaded-build 
+
+      - name: Proof that artifact upload ans download works
+        run: |
+          echo "only the files that came from the artifact:"
+          ls -R download-build
+          cat download-build/build-info.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+      
