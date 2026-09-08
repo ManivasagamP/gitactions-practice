@@ -1,0 +1,54 @@
+name: Multi Dimension matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.os }} - ${{ matrix.node }} - ${{ matrix.label }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [20, 22, 24]
+
+        exclude:
+          - os: macos-latest
+            node: 20
+
+          - os: macos-latest
+            node: 22
+
+        include:
+          - os: ubuntu-latest
+            node: 20
+            label: '(Primary)'
+
+          - os: ubuntu-latest
+            node: 18
+            label: '(Legacy support)'
+
+    defaults:
+      run:
+        working-directory: sample-app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+          cache-dependency-path: 'sample-app/package-lock.json'
+
+      - run: npm ci
+
+      - name: Report the multidimension
+        run: echo "os=${{ matrix.os }} node=${{ matrix.node }} label=${{ matrix.label }}"
+
+      - run: npm test
