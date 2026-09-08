@@ -1,0 +1,53 @@
+name: Matrix basics
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test on the node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+
+    defaults:
+      run:
+        working-directory: sample/app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup node with ${{matrix.node}}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{matrix.node}}
+          cache: 'npm'
+          cache-dependency-path: 'sample-app/package-lock.json'
+
+      - run: npm ci
+
+      - name: Prove which node we are on
+        run: |
+          echo "matrix node = ${{matrix.node}}"
+          node --version
+
+      - run: npm test
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
