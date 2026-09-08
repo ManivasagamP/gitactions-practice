@@ -45,7 +45,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: app-build
-          path: downloaded-build 
+          path: download-build 
 
       - name: Proof that artifact upload ans download works
         run: |
