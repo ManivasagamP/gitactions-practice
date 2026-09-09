@@ -1,7 +1,7 @@
 name: Work Flow Callee
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       node-version:
         description: 'Node.js version to test against'
