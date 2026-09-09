@@ -20,7 +20,7 @@ on:
         required: false
         
     outputs:
-      tested-version: 
+      tested_version: 
         description: 'The Node version that actually ran'
         value: ${{jobs.run-test.outputs.node-version}}
 
